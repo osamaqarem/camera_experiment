@@ -6,7 +6,6 @@ export default function Home() {
   const video = useRef<HTMLVideoElement | null>(null)
   const canvas = useRef<HTMLCanvasElement | null>(null)
   const img = useRef<HTMLImageElement | null>(null)
-  const captureEnvRef = useRef<HTMLInputElement | null>(null)
 
   const getMedia = async () => {
     try {
@@ -37,10 +36,6 @@ export default function Home() {
       const data = canvas.current!.toDataURL("image/png")
       img.current!.setAttribute("src", data)
     }
-  }
-
-  const captureEnv = () => {
-    captureEnvRef.current?.click()
   }
 
   return (
@@ -76,13 +71,6 @@ export default function Home() {
             >
               Take photo
             </button>
-            <div className="px-4" />
-            <button
-              className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
-              onClick={captureEnv}
-            >
-              file capture="env"
-            </button>
           </div>
           <div className="py-10" />
           <canvas ref={canvas} className="hidden" />
@@ -91,12 +79,7 @@ export default function Home() {
           <input type="file" accept="image/*" capture="environment" />
           <div className="py-10" />
           {JSON.stringify("<input capture=user/>")}
-          <input
-            type="file"
-            accept="image/*"
-            capture="user"
-            ref={captureEnvRef}
-          />
+          <input type="file" accept="image/*" capture="user" />
 
           <div className="text-sm pt-5">
             *capture environment:
@@ -109,7 +92,7 @@ export default function Home() {
           </div>
           <div className="py-10" />
           {JSON.stringify("<img/>")}
-          <div className="w-screen h-screen bg-red-100">
+          <div className=" bg-red-100">
             <img
               className="bg-pink-300 border-0"
               ref={img}
