@@ -10,7 +10,7 @@ export default function Home() {
   const getMedia = async (facingMode: "user" | "environment") => {
     try {
       stream.current = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" },
+        video: { facingMode },
       })
       video.current!.srcObject = stream.current
       video.current?.play()
