@@ -7,7 +7,7 @@ export default function Home() {
   const canvas = useRef<HTMLCanvasElement | null>(null)
   const img = useRef<HTMLImageElement | null>(null)
 
-  const getMedia = async () => {
+  const getMedia = async (facingMode: "user" | "environment") => {
     try {
       stream.current = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "user" },
@@ -60,9 +60,25 @@ export default function Home() {
           <div className="flex justify-center flex-wrap">
             <button
               className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
-              onClick={getMedia}
+              onClick={() => getMedia("user")}
             >
-              Start Stream
+              Start Stream (Front)
+            </button>
+            <div className="px-4" />
+            <button
+              className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
+              onClick={() => getMedia("environment")}
+            >
+              Start Stream (Back)
+            </button>
+            <div className="px-4" />
+            <button
+              className="bg-orange-400 px-8 h-10 text-white text-xl rounded hover:bg-orange-500"
+              onClick={() =>
+                stream.current?.getTracks().forEach((track) => track.stop())
+              }
+            >
+              Stop Stream
             </button>
             <div className="px-4" />
             <button
@@ -75,7 +91,7 @@ export default function Home() {
           <div className="py-10" />
           <canvas ref={canvas} className="hidden" />
           <div className="py-10" />
-          {JSON.stringify("<input capture=environemnt/>")}
+          {JSON.stringify("<input capture=environment/>")}
           <input type="file" accept="image/*" capture="environment" />
           <div className="py-10" />
           {JSON.stringify("<input capture=user/>")}
