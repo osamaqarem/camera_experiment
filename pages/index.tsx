@@ -77,7 +77,7 @@ export default function Home() {
           <canvas ref={canvas} className="hidden" />
 
           {JSON.stringify("<img/>")}
-          <img ref={img} />
+          <img ref={img} width={1270} height={720} />
         </div>
       </main>
       <footer />
