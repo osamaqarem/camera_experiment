@@ -57,7 +57,7 @@ export default function Home() {
             Video stream not available.
           </video>
           <div className="py-10" />
-          <div className="flex justify-center flex-wrap">
+          <div className="flex justify-center flex-wrap gap-y-4">
             <button
               className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
               onClick={() => getMedia("user")}
