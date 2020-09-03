@@ -6,11 +6,12 @@ export default function Home() {
   const video = useRef<HTMLVideoElement | null>(null)
   const canvas = useRef<HTMLCanvasElement | null>(null)
   const img = useRef<HTMLImageElement | null>(null)
+  const captureEnvRef = useRef<HTMLInputElement | null>(null)
 
   const getMedia = async () => {
     try {
       stream.current = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user", width: 250, height: 500 },
+        video: { facingMode: "user" },
       })
       video.current!.srcObject = stream.current
       video.current?.play()
@@ -38,6 +39,10 @@ export default function Home() {
     }
   }
 
+  const captureEnv = () => {
+    captureEnvRef.current?.click()
+  }
+
   return (
     <div>
       <Head>
@@ -48,36 +53,70 @@ export default function Home() {
       <main className="p-10">
         <div className="flex flex-col items-center">
           {JSON.stringify("<video/>")}
-          <video ref={video} className="bg-purple-200" width={250} height={500}>
+          <video
+            ref={video}
+            className="bg-purple-200"
+            width={1280}
+            height={720}
+          >
             Video stream not available.
           </video>
           <div className="py-10" />
-          <div className="flex justify-center">
+          <div className="flex justify-center flex-wrap">
             <button
-              className="bg-indigo-400 w-40 h-10 text-white text-xl rounded hover:bg-indigo-500"
+              className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
               onClick={getMedia}
             >
               Start Stream
             </button>
             <div className="px-4" />
             <button
-              className="bg-indigo-400 w-40 h-10 text-white text-xl rounded hover:bg-indigo-500"
+              className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
               onClick={takePicture}
             >
               Take photo
             </button>
+            <div className="px-4" />
+            <button
+              className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
+              onClick={captureEnv}
+            >
+              file capture="env"
+            </button>
           </div>
           <div className="py-10" />
-
           <canvas ref={canvas} className="hidden" />
-
-          {JSON.stringify("<img/>")}
-          <img
-            className="bg-pink-300 border-0"
-            ref={img}
-            width={video.current?.videoWidth}
-            height={video.current?.videoHeight}
+          <div className="py-10" />
+          {JSON.stringify("<input capture=environemnt/>")}
+          <input type="file" accept="image/*" capture="environment" />
+          <div className="py-10" />
+          {JSON.stringify("<input capture=user/>")}
+          <input
+            type="file"
+            accept="image/*"
+            capture="user"
+            ref={captureEnvRef}
           />
+
+          <div className="text-sm pt-5">
+            *capture environment:
+            <a
+              className="text-blue-700 font-medium"
+              href="https://www.w3.org/TR/mediacapture-streams/#dom-videofacingmodeenum"
+            >
+              mediacapture-streams/#dom-videofacingmodeenum
+            </a>
+          </div>
+          <div className="py-10" />
+          {JSON.stringify("<img/>")}
+          <div className="w-screen h-screen bg-red-100">
+            <img
+              className="bg-pink-300 border-0"
+              ref={img}
+              width={"100%"}
+              height={"100%"}
+            />
+          </div>
         </div>
       </main>
       <footer />
