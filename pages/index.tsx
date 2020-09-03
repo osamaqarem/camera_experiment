@@ -15,8 +15,7 @@ export default function Home() {
       video.current!.srcObject = stream.current
       video.current?.play()
     } catch (err) {
-      alert("getMedia error. Check console.")
-      console.error(err)
+      alert(err)
     }
   }
 
@@ -53,13 +52,14 @@ export default function Home() {
             Video stream not available.
           </video>
           <div className="py-10" />
-          <div className="flex gap-x-10 justify-center">
+          <div className="flex justify-center">
             <button
               className="bg-indigo-400 w-40 h-10 text-white text-xl rounded hover:bg-indigo-500"
               onClick={getMedia}
             >
-              Get media
+              Start Stream
             </button>
+            <div className="px-4" />
             <button
               className="bg-indigo-400 w-40 h-10 text-white text-xl rounded hover:bg-indigo-500"
               onClick={takePicture}
