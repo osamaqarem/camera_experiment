@@ -10,7 +10,7 @@ export default function Home() {
   const getMedia = async () => {
     try {
       stream.current = await navigator.mediaDevices.getUserMedia({
-        video: { width: 1280, height: 720, facingMode: "user" },
+        video: { facingMode: "user", width: 250, height: 500 },
       })
       video.current!.srcObject = stream.current
       video.current?.play()
@@ -42,19 +42,14 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Template</title>
+        <title>Camera Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="p-10">
         <div className="flex flex-col items-center">
           {JSON.stringify("<video/>")}
-          <video
-            ref={video}
-            className="bg-purple-200"
-            width={1280}
-            height={720}
-          >
+          <video ref={video} className="bg-purple-200" width={250} height={500}>
             Video stream not available.
           </video>
           <div className="py-10" />
@@ -77,7 +72,12 @@ export default function Home() {
           <canvas ref={canvas} className="hidden" />
 
           {JSON.stringify("<img/>")}
-          <img ref={img} width={1270} height={720} />
+          <img
+            className="bg-pink-300 border-0"
+            ref={img}
+            width={video.current?.videoWidth}
+            height={video.current?.videoHeight}
+          />
         </div>
       </main>
       <footer />
