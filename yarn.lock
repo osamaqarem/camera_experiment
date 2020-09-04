@@ -2884,6 +2884,11 @@ iferr@^0.1.5:
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
   integrity sha1-xg7taebY/bazEEofy8ocGS3FtQE=
 
+image-capture@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/image-capture/-/image-capture-0.4.0.tgz#67b96608d0b58ecb1337ee335e4492733f6c11ee"
+  integrity sha512-6RWTfqC4ij0AldG+6sQ51XSHTSbwfqMSjVl1GtwNBzbW4UrcfGZeB1Kn749BccvtLb04g5+jSTf1D7q3qHcxpA==
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
