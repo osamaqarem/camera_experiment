@@ -11,7 +11,7 @@ export default function Home() {
   const getMedia = async (facingMode: "user" | "environment") => {
     try {
       stream.current = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode },
+        video: { facingMode, aspectRatio: 1, width: 1000, height: 1000 },
       })
       video.current!.srcObject = stream.current
       video.current?.play()
@@ -60,8 +60,8 @@ export default function Home() {
           <video
             ref={video}
             className="bg-purple-200"
-            width={1280}
-            height={720}
+            width={1000}
+            height={1000}
           >
             Video stream not available.
           </video>
@@ -124,14 +124,12 @@ export default function Home() {
           </div>
           <div className="py-10" />
           {JSON.stringify("<img/>")}
-          <div className=" bg-red-100">
-            <img
-              className="bg-pink-300 border-0"
-              ref={img}
-              width={"100%"}
-              height={"100%"}
-            />
-          </div>
+          <img
+            className="bg-pink-300 border-0"
+            height={1000}
+            width={1000}
+            ref={img}
+          />
         </div>
       </main>
       <footer />
