@@ -6,6 +6,7 @@ export default function Home() {
   const video = useRef<HTMLVideoElement | null>(null)
   const canvas = useRef<HTMLCanvasElement | null>(null)
   const img = useRef<HTMLImageElement | null>(null)
+  const imgCapture = useRef<any>(null)
 
   const getMedia = async (facingMode: "user" | "environment") => {
     try {
@@ -14,12 +15,15 @@ export default function Home() {
       })
       video.current!.srcObject = stream.current
       video.current?.play()
+
+      const mediaStreamTrack = stream.current.getVideoTracks()[0]
+      imgCapture.current = new ImageCapture(mediaStreamTrack)
     } catch (err) {
       alert(err)
     }
   }
 
-  const takePicture = () => {
+  const grabFrame = () => {
     const context = canvas.current!.getContext("2d") as CanvasRenderingContext2D
     if (video.current!.width && video.current!.height) {
       canvas.current!.width = video.current!.width
@@ -36,6 +40,11 @@ export default function Home() {
       const data = canvas.current!.toDataURL("image/png")
       img.current!.setAttribute("src", data)
     }
+  }
+
+  const takePhoto = async () => {
+    const blob = await imgCapture.current.takePhoto()
+    img.current!.src = URL.createObjectURL(blob)
   }
 
   return (
@@ -83,9 +92,16 @@ export default function Home() {
             <div className="px-4" />
             <button
               className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
-              onClick={takePicture}
+              onClick={grabFrame}
             >
-              Take photo
+              Grab Frame
+            </button>
+            <div className="px-4" />
+            <button
+              className="bg-indigo-400 px-8 h-10 text-white text-xl rounded hover:bg-indigo-500"
+              onClick={takePhoto}
+            >
+              Take Photo
             </button>
           </div>
           <div className="py-10" />
